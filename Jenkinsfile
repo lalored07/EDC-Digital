@@ -1,6 +1,6 @@
 pipeline { 
     //agent any
-    agent { dockerfile true }
+    
     tools { nodejs "nodejs12x" }
     stages {
        stage('Build'){
@@ -16,4 +16,5 @@ pipeline {
         }
         
     }
+    agent { dockerfile true }
 }
