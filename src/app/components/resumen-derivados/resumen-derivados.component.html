@@ -1,0 +1,44 @@
+<div class="main_block">
+  <div class="main_large_disclaimer">Elige el derivado que deseas consultar</div>
+  <div class="combo_select">
+    <div class="combo_select_label">Tipo de derivados</div>
+    <form>
+      <select name="derivativeType" id="derivativeTypeCombo" [formControl]="derivativeType">
+        <option value="" disabled>Escoge un tipo de derivado</option>
+        <option [value]="type.value" *ngFor="let type of derivadosService.allowedDerivados">{{type.text}}</option>
+      </select>
+    </form>
+  </div>
+</div>
+<ng-container *ngIf="canShow">
+  <div class="main_label">{{derivadosService.derivativeTypeText}}</div>
+  <div class="big_buttons_container">
+    <div class="big_button">
+      <div class="big_button_label">Valuación posición derivado</div>
+      <div class="big_button_value">{{derivadosService.resumen.saldoGarantiasMxn | currency}}</div>
+    </div>
+  </div>
+  <div class="operaciones_charts">
+    <div class="chart_outter">
+      <div class="top_chart_label">Pesos mexicanos</div>
+      <div class="chart_wrapper">
+        <div class="chart_label">
+          <div class="chart_text">Nocional vigente</div>
+          <div class="chart_bold_text">{{derivadosService.resumen.saldoGarantiasMxn | currency}}</div>
+        </div>
+        <div echarts [options]="derivadosService.nocionalVigentePesos" class="chart_medium"></div>
+      </div>
+    </div>
+    <div class="chart_outter">
+      <div class="top_chart_label">Dólares americanos</div>
+      <div class="chart_wrapper">
+        <div class="chart_label">
+          <div class="chart_text">Nocional vigente</div>
+          <div class="chart_bold_text">{{derivadosService.resumen.saldoGarantiasMxn * derivadosService.resumen.tipoCambio  | currency}}</div>
+        </div>
+        <div echarts [options]="derivadosService.nocionalVigenteDolares" class="chart_medium"></div>
+      </div>
+    </div>
+  </div>
+</ng-container>
+

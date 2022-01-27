@@ -1,0 +1,82 @@
+<div class="body_header">
+  <div class="main_subtitle">Resumen de cuenta</div>
+  <div class="main_link" (click)="openDialog()">Ver detalle</div>
+</div>
+<div class="big_buttons_container">
+  <div class="big_button" (click)="centralService.changeUltimosMovimientosMainFilter('saldoTotal')">
+    <div class="big_button_label">Saldo</div>
+    <div class="big_button_value">
+      {{centralService.resumen.saldoTotal | currency}}
+    </div>
+  </div>
+  <div class="big_button" (click)="centralService.changeUltimosMovimientosMainFilter('abono')">
+    <div class="big_button_label">Total abonos</div>
+    <div class="big_button_value --green">
+      {{centralService.resumen.importeAbono| currency}}
+    </div>
+  </div>
+  <div class="big_button" (click)="centralService.changeUltimosMovimientosMainFilter('cargo')">
+    <div class="big_button_label">Total cargos</div>
+    <div class="big_button_value --red">
+      {{centralService.resumen.importeCargo| currency}}
+    </div>
+  </div>
+</div>
+<div class="main_label">Agosto 2021</div>
+<ng-container *ngIf="centralService.ultimosMovimientosMainFilter === 'saldoTotal'">
+  <div class="operaciones_charts">
+    <div class="chart_outter">
+      <div class="chart_wrapper">
+        <div class="chart_label">
+          <div class="chart_text">Total de inversión</div>
+          <div class="chart_bold_text">{{centralService.resumen.saldoTotal | currency}}</div>
+        </div>
+        <div echarts [options]="centralService.currentMonthChart" class="chart_large"></div>
+      </div>
+    </div>
+    <div class="chart_outter">
+      <div class="top_chart_label">Total abonos</div>
+      <div class="chart_wrapper">
+        <div class="chart_label">
+          <div class="chart_bold_text">{{centralService.resumen.importeAbono | currency}}</div>
+        </div>
+        <div echarts [options]="centralService.currentAbonos" class="chart_small"></div>
+      </div>
+    </div>
+    <div class="chart_outter">
+      <div class="top_chart_label">Total cargos</div>
+      <div class="chart_wrapper">
+        <div class="chart_label">
+          <div class="chart_bold_text">{{centralService.resumen.importeCargo | currency}}</div>
+        </div>
+        <div echarts [options]="centralService.currentCargos" class="chart_small"></div>
+      </div>
+    </div>
+  </div>
+</ng-container>
+<ng-container *ngIf="centralService.ultimosMovimientosMainFilter === 'abono'">
+  <div class="operaciones_charts">
+    <div class="chart_outter">
+      <div class="chart_wrapper">
+        <div class="chart_label">
+          <div class="chart_text">Total de abonos</div>
+          <div class="chart_bold_text">{{centralService.resumen.importeAbono | currency}}</div>
+        </div>
+        <div echarts [options]="centralService.currentAbonosDetalle" class="chart_large"></div>
+      </div>
+    </div>
+  </div>
+</ng-container>
+<ng-container *ngIf="centralService.ultimosMovimientosMainFilter === 'cargo'">
+  <div class="operaciones_charts">
+    <div class="chart_outter">
+      <div class="chart_wrapper">
+        <div class="chart_label">
+          <div class="chart_text">Total de cargos</div>
+          <div class="chart_bold_text">{{centralService.resumen.importeCargo | currency}}</div>
+        </div>
+        <div echarts [options]="centralService.currentCargosDetalle" class="chart_large"></div>
+      </div>
+    </div>
+  </div>
+</ng-container>

@@ -1,0 +1,153 @@
+<div class="footer">
+  <div *ngIf="derivadosService.derivadosChanges$ | async" class="main_subtitle">{{derivadosService.derivativeTypeText}}</div>
+  <ng-container *ngIf="(derivadosService.derivadosChanges$ | async) === 'derivadosForward'">
+    <div *ngFor="let derivado of derivadosService.derivadosMixed">
+      <div class="main_table_title">{{derivado.monedaRefer}}</div>
+      <table class="table" >
+        <thead>
+          <tr>
+            <th>Fecha de operación</th>
+            <th>Referencia</th>
+            <th>Tipo de operación</th>
+            <th>Fecha vencimiento</th>
+            <th>Fecha de liquidación</th>
+            <th>Cantidad del subyacente</th>
+            <th>Precio pactado</th>
+            <th>Tipo de liquidación</th>
+            <th>Modalidad</th>
+            <th>Valuación actual en MXN</th>
+            <th>Valuación actual en MXN</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of derivado.items">
+            <td>{{item.fechaOperacion | date:'dd-MMM-yyyy'}}</td>
+            <td>{{item.idReferencia}}</td>
+            <td>{{item.claveTipoOperacion}}</td>
+            <td>{{item.fechaVencimiento | date:'dd-MMM-yyyy'}}</td>
+            <td>{{item.fechaLiquidacion | date:'dd-MMM-yyyy'}}</td>
+            <td>{{item.cantSubyacente | currency}}</td>
+            <td>{{item.precPactado | currency}}</td>
+            <td>{{item.tipoLiquidacion}}</td>
+            <td>{{item.tipoModalidad}}</td>
+            <td>{{item.impValuacionMxn | currency}}</td>
+            <td>{{item.impValuacionMxn | currency}}</td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>Total</td>
+            <td>{{derivado.cantSubyacente | currency}}</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>{{derivadosService.totales.impValuacionMxn | currency}}</td>
+            <td>{{derivadosService.totales.impValuacionMxn | currency}}</td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="(derivadosService.derivadosChanges$ | async) === 'derivadosOpciones'">
+    <div *ngFor="let derivado of derivadosService.derivadosMixed">
+      <div class="main_table_title">{{derivado.monedaRefer}}</div>
+      <table class="table" >
+        <thead>
+          <tr>
+            <th>Fecha de operación</th>
+            <th>Referencia</th>
+            <th>Tipo de operación</th>
+            <th>Call/Put</th>
+            <th>Precio de ejercicio</th>
+            <th>Fecha vencimiento</th>
+            <th>Fecha de liquidación</th>
+            <th>Cantidad del subyacente</th>
+            <th>Prima unitaria pactada</th>
+            <th>Tipo de liquidación</th>
+            <th>Modalidad</th>
+            <th>Valuación actual en MXN</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of derivado.items">
+            <td>{{item.fechaOperacion | date:'dd-MMM-yyyy'}}</td>
+            <td>{{item.idReferencia}}</td>
+            <td>{{item.claveTipoOperacion}}</td>
+            <td>{{item.claveCallPut}}</td>
+            <td>{{item.precEjercicio | currency}}</td>
+            <td>{{item.fechaVencimiento | date:'dd-MMM-yyyy'}}</td>
+            <td>{{item.fechaLiquidacion | date:'dd-MMM-yyyy'}}</td>
+            <td>{{item.cantSubyacente | currency}}</td>
+            <td>{{item.primaUniPactada | currency}}</td>
+            <td>{{item.tipoLiquidacion}}</td>
+            <td>{{item.tipoModalidad}}</td>
+            <td>{{item.impValuacionMxn | currency}}</td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>Total</td>
+            <td>{{derivadosService.totales.cantSubyacente | currency}}</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>{{derivadosService.totales.impValuacionMxn | currency}}</td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="(derivadosService.derivadosChanges$ | async) === 'derivadosSwaps'">
+    <div *ngFor="let derivado of derivadosService.derivadosMixed">
+      <div class="main_table_title">{{derivado.monedaRefer}}</div>
+      <table class="table" >
+        <thead>
+          <tr>
+            <th>Fecha de operación</th>
+            <th>Fecha Vencimiento</th>
+            <th>Nocional inicial impactado</th>
+            <th>Tasa a entregar</th>
+            <th>Tasa a recibir</th>
+            <th>Nocional vigente</th>
+            <th>Valuación actual en MXP</th>
+            <th>Valuación actual en MXN</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of derivado.items">
+            <td>{{item.fechaOperacion}}</td>
+            <td>{{item.fechaVencimiento}}</td>
+            <td>{{item.impNocionPactado | currency}}</td>
+            <td>{{item.tasaEntregar}}</td>
+            <td>{{item.tasaRecibir}}</td>
+            <td>{{item.impNocionVigente | currency}}</td>
+            <td>{{item.impValuacionAct | currency}}</td>
+            <td>{{item.impValuacionMxn | currency}}</td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td></td>
+            <td>Total</td>
+            <td>{{derivadosService.totales.impNocionPactado | currency}}</td>
+            <td></td>
+            <td></td>
+            <td>{{derivadosService.totales.impNocionVigente | currency}}</td>
+            <td>{{derivadosService.totales.impValuacionAct | currency}}</td>
+            <td>{{derivadosService.totales.impValuacionMxn | currency}}</td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  </ng-container>
+</div>

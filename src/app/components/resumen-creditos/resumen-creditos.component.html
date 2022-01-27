@@ -1,0 +1,103 @@
+<div class="main_block">
+  <div class="main_large_disclaimer">Elige el estado y número de crédito que deseas consultar</div>
+  <div class="combo_flex">
+    <div class="combo_select">
+      <div class="combo_select_label">Estado del crédito</div>
+      <select name="periodo" id="creditStateCombo" [formControl]="currentState">
+        <option value="" disabled>Elige el estado</option>
+        <option *ngFor="let estado of estados" [value]="estado.value">{{estado.text}}</option>
+      </select>
+    </div>
+    <ng-container *ngIf="credits.length">
+      <div class="combo_select">
+        <div class="combo_select_label">No. de Crédito</div>
+        <select name="periodo" id="creditNumberCombo" [formControl]="currentCreditNumber">
+          <option value="" disabled>Elige el crédito</option>
+          <option [value]="credito.subCredito" *ngFor="let credito of credits">{{credito.subCredito}}</option>
+        </select>
+      </div>
+    </ng-container>
+  </div>
+</div>
+<ng-container *ngIf="currentCredit">
+  <div>
+    <div class="main_subtitle">Detalle de crédito no. {{currentCredit.subCredito}}</div>
+    <div class="credit_container">
+
+      <div class="credit_column">
+        <div class="big_button full_button">
+          <div class="big_button_label">Saldo</div>
+          <div class="big_button_value">{{currentCredit.saldoInsolutoMesAnt | currency}}</div>
+        </div>
+        <div class="credit_details">
+          <div class="credit_row">
+            <div>Saldo insoluto anterior:</div>
+            <div>{{currentCredit.saldoInsolutoMesAnt | currency}}</div>
+          </div>
+          <div class="credit_row">
+            <div>Pagos realizados en el mes:</div>
+            <div>{{currentCredit.impPagoTotal | currency}}</div>
+          </div>
+          <div class="credit_row">
+            <div>Capital:</div>
+            <div>{{currentCredit.impPagoCapital | currency}}</div>
+          </div>
+          <div class="credit_row">
+            <div>Anticipos a capital:</div>
+            <div>{{currentCredit.impPagoAnticipado | currency}}</div>
+          </div>
+          <div class="credit_row">
+            <div>Intereses ordinarios:</div>
+            <div>{{currentCredit.impPagoIntereses | currency}}</div>
+          </div>
+          <div class="credit_row">
+            <div>Intereses moratorios:</div>
+            <div>{{currentCredit.impPagoIntMoratorio | currency}}</div>
+          </div>
+          <div class="credit_row">
+            <div>IVA/Intereses:</div>
+            <div>{{currentCredit.impPagoIntIVA | currency}}</div>
+          </div>
+          <div class="credit_row">
+            <div>Saldo insoluto actual:</div>
+            <div>{{currentCredit.impCapitalReal | currency}}</div>
+          </div>
+          <div class="credit_row">
+            <div>Saldo vencido:</div>
+            <div>{{currentCredit.impSaldoVencido | currency}}</div>
+          </div>
+
+        </div>
+      </div>
+
+
+      <div class="credit_column">
+        <div class="credit_special_rows">
+          <div class="credit_row">
+            <div class="credit_row_special_text">Fecha de vencimiento</div>
+            <div>{{currentCredit.fechaVencimiento | date:'dd-MMM-yyyy'}}</div>
+          </div>
+          <div class="credit_row">
+            <div class="credit_row_special_text">Número de pago:</div>
+            <div>{{currentCredit.numPago}}</div>
+          </div>
+          <div class="credit_row">
+            <div class="credit_row_special_text">Pagos pendientes:</div>
+            <div>{{currentCredit.numPagosPendientes}}</div>
+          </div>
+        </div>
+
+        <div class="main_subtitle">
+          Pagos realizados
+        </div>
+        <div>
+          <div echarts [options]="chartOptions" class="chart_large"></div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</ng-container>
+

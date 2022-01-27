@@ -1,0 +1,55 @@
+<div class="footer">
+  <div class="main_subtitle">Movimientos {{divisasService.currentDivisasCurrency.text}}</div>
+  <div class="paginador-container">
+    <div
+      class="paginador-container-item"
+      [ngClass]="{active: divisasService.paginador.paginaActual === i}"
+      *ngFor="let pagina of divisasService.paginador.paginas; let i = index;"
+      (click)="divisasService.changePage(i)">
+      {{pagina + 1}}
+    </div>
+  </div>
+  <table class="table">
+    <thead>
+      <tr>
+        <th (click)="divisasService.getDivisas('fechaMovimiento')">
+          <div class="title-icon" [ngClass]="{'active': divisasService.divisasFilters.fechaMovimiento}">
+            Fecha <div class="chevron-down-solid"></div>
+          </div>
+        </th>
+        <th (click)="divisasService.getDivisas('descDetalle')">
+          <div class="title-icon" [ngClass]="{'active': divisasService.divisasFilters.descDetalle}">
+            Descripción <div class="chevron-down-solid"></div>
+          </div>
+        </th>
+        <th (click)="divisasService.getDivisas('monto')">
+          <div class="title-icon" [ngClass]="{'active': divisasService.divisasFilters.monto}">
+            Monto <div class="chevron-down-solid"></div>
+          </div>
+        </th>
+        <th (click)="divisasService.getDivisas('tipoCambio')">
+          <div class="title-icon" [ngClass]="{'active': divisasService.divisasFilters.tipoCambio}">
+            Tipo de cambio <div class="chevron-down-solid"></div>
+          </div>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let divisa of divisasService.filteredItems">
+        <td>{{divisa.fechaMovimiento}}</td>
+        <td>{{divisa.descDetalle}}</td>
+        <td>{{divisa.monto | currency}}</td>
+        <td>{{divisa.tipoCambio | currency}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div class="paginador-container">
+  <div
+    class="paginador-container-item"
+    [ngClass]="{active: divisasService.paginador.paginaActual === i}"
+    *ngFor="let pagina of divisasService.paginador.paginas; let i = index;"
+    (click)="divisasService.changePage(i)">
+    {{pagina + 1}}
+  </div>
+</div>

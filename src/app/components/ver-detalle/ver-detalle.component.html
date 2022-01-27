@@ -1,0 +1,106 @@
+<div class="resumen_modal">
+  <div class="main_subtitle">Resumen de cuenta</div>
+  <div class="close_modal" mat-dialog-close></div>
+  <div class="credit_container_modal">
+    <div class="credit_column_modal">
+      <div class="credit_row">
+        <div class="credit_row_special_text">Peso mexicano</div>
+        <div class="credit_row_special_text">Al 31 de Agosto 2021</div>
+      </div>
+      <div class="credit_row">
+        <div>Saldo Inicial:</div>
+        <div class="column_align_right">{{centralService.resumen.saldoInicial | currency}}</div>
+      </div>
+      <div class="credit_row">
+        <div>+ Total abonos:</div>
+        <div class="column_align_right --green">{{centralService.resumen.importeAbono | currency}}</div>
+      </div>
+      <div class="credit_row">
+        <div>- Total Cargos:</div>
+        <div class="column_align_right --red">{{centralService.resumen.importeCargo | currency}}</div>
+      </div>
+      <div class="credit_row">
+        <div>Saldo Posición Divisas (swap):</div>
+        <div class="column_align_right">{{centralService.resumen.swapAutomatico | currency}}</div>
+      </div>
+      <div class="credit_row">
+        <div>Saldo vista:</div>
+        <div class="column_align_right">{{centralService.resumen.saldoVista | currency}}</div>
+      </div>
+      <div class="credit_row">
+        <div>Saldo en garantía de derivados:</div>
+        <div class="column_align_right">{{centralService.resumen.saldoGarantiaDeri | currency}}</div>
+      </div>
+      <div class="credit_row">
+        <div>Saldo en inversiones:</div>
+        <div class="column_align_right">{{centralService.resumen.saldoInversion | currency}}</div>
+      </div>
+      <div class="credit_row">
+        <div class="column_total">Saldo Total:</div>
+        <div class="column_align_right column_total">{{centralService.resumen.saldoTotal | currency}}</div>
+      </div>
+      <div class="credit_row first_special_modal_row special_modal_row">
+        <div class="credit_row_special_text">Comisiones:</div>
+        <div class="column_align_right">{{centralService.resumen.comision | currency}}</div>
+      </div>
+      <div class="credit_row special_modal_row">
+        <div class="credit_row_special_text">Intereses pagados vista:</div>
+        <div class="column_align_right">{{centralService.resumen.interesPagVista | currency}}</div>
+      </div>
+      <div class="credit_row special_modal_row">
+        <div class="credit_row_special_text">Tasa aplicable a depósitos:</div>
+        <div class="column_align_right">{{centralService.resumen.tasaInteres}}%</div>
+      </div>
+      <div class="credit_row special_modal_row">
+        <div class="credit_row_special_text">GAT nominal (antes de impuestos):</div>
+        <div class="column_align_right">{{centralService.resumen.gatNominal}}%</div>
+      </div>
+      <div class="credit_row special_modal_row">
+        <div class="credit_row_special_text max_width_column">GAT Real (Rendimiento que se obtendría después de descontar la inflación estimada):</div>
+        <div class="column_align_right">{{centralService.resumen.gatReal}}%</div>
+      </div>
+    </div>
+    <div class="credit_column_modal">
+      <div class="credit_row">
+        <div class="credit_row_special_text credit_promedio_column">Concepto</div>
+        <div class="credit_periodo_column credit_row_special_text column_align_right">Del periodo</div>
+        <div class="credit_periodo_column credit_row_special_text column_align_right">Acumulado</div>
+      </div>
+      <div class="credit_row">
+        <div class="credit_promedio_column">Saldo promedio (intereses):</div>
+        <div class="credit_periodo_column column_align_right">{{centralService.resumen.saldoPromedio | currency}}</div>
+        <div class="credit_periodo_column column_align_right">{{centralService.resumen.saldoPromedio | currency}}</div>
+      </div>
+      <div class="credit_row">
+        <div class="credit_promedio_column">Saldo promedio (cobertura):</div>
+        <div class="credit_periodo_column column_align_right">{{centralService.resumen.saldoPromedioCob | currency}}</div>
+        <div class="credit_periodo_column column_align_right">{{centralService.resumen.saldoPromedioCob | currency}}</div>
+      </div>
+      <div class="credit_row">
+        <div class="credit_promedio_column">ISR Intereses por saldo:</div>
+        <div class="credit_periodo_column column_align_right">{{centralService.resumen.isrInteresSaldo | currency}}</div>
+        <div class="credit_periodo_column column_align_right">{{centralService.resumen.isrInteresAcum | currency}}</div>
+      </div>
+      <div class="credit_row">
+        <div class="credit_promedio_column">ISR Operaciones derivados:</div>
+        <div class="credit_periodo_column column_align_right">{{centralService.resumen.isrDerivados | currency}}</div>
+        <div class="credit_periodo_column column_align_right">{{centralService.resumen.isrDerivadosAcum | currency}}</div>
+      </div>
+      <div class="credit_row">
+        <div class="credit_promedio_column">ISR Operaciones de dinero:</div>
+        <div class="credit_periodo_column column_align_right">{{centralService.resumen.isrDineroMes | currency}}</div>
+        <div class="credit_periodo_column column_align_right">{{centralService.resumen.isrDineroAcum | currency}}</div>
+      </div>
+      <div class="credit_row">
+        <div class="credit_promedio_column">ISR Inversión a plazo:</div>
+        <div class="credit_periodo_column column_align_right">{{centralService.resumen.isrInversion | currency}}</div>
+        <div class="credit_periodo_column column_align_right">{{centralService.resumen.isrInversionAcum | currency}}</div>
+      </div>
+      <div class="credit_row">
+        <div class="credit_promedio_column">IVA/Comisiones e intereses:</div>
+        <div class="credit_periodo_column column_align_right">{{centralService.resumen.ivaComision | currency}}</div>
+        <div class="credit_periodo_column column_align_right">{{centralService.resumen.ivaComision | currency}}</div>
+      </div>
+    </div>
+  </div>
+</div>

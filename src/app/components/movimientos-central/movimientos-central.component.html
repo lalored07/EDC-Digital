@@ -1,0 +1,51 @@
+<div class="footer">
+  <div class="main_subtitle">Últimos movimientos</div>
+  <div class="paginador-container">
+    <div
+      class="paginador-container-item"
+      [ngClass]="{active: centralService.paginador.paginaActual === i}"
+      *ngFor="let pagina of centralService.paginador.paginas; let i = index;"
+      (click)="centralService.changePage(i)">
+      {{pagina + 1}}
+    </div>
+  </div>
+  <table class="table">
+    <thead>
+      <tr>
+        <th (click)="centralService.getMovimientos('fechaMovimiento')">
+          <div class="title-icon" [ngClass]="{'active': centralService.ultimosMovimientosFilters.fechaMovimiento}">Fecha <div class="chevron-down-solid"></div></div>
+        </th>
+        <th (click)="centralService.getMovimientos('descDetalle')">
+          <div class="title-icon" [ngClass]="{'active': centralService.ultimosMovimientosFilters.descDetalle}">Descripción <div class="chevron-down-solid"></div></div>
+        </th>
+        <th (click)="centralService.getMovimientos('abono')">
+          <div class="title-icon" [ngClass]="{'active': centralService.ultimosMovimientosFilters.abono}">Abonos <div class="chevron-down-solid"></div></div>
+        </th>
+        <th (click)="centralService.getMovimientos('cargo')">
+          <div class="title-icon" [ngClass]="{'active': centralService.ultimosMovimientosFilters.cargo}">Cargos <div class="chevron-down-solid"></div></div>
+        </th>
+        <th (click)="centralService.getMovimientos('saldoTotal')">
+          <div class="title-icon" [ngClass]="{'active': centralService.ultimosMovimientosFilters.saldoTotal}">Saldo <div class="chevron-down-solid"></div></div>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let mv of centralService.ultimosMovimientosFiltered">
+        <td>{{mv.fechaMovimiento}}</td>
+        <td>{{mv.descDetalle}}</td>
+        <td [ngClass]="{'--green' : mv.abono !== 0}">{{mv.abono | currency}}</td>
+        <td [ngClass]="{'--red' : mv.cargo !== 0}">{{mv.cargo | currency}}</td>
+        <td>{{mv.saldoTotal | currency}}</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="paginador-container">
+    <div
+      class="paginador-container-item"
+      [ngClass]="{active: centralService.paginador.paginaActual === i}"
+      *ngFor="let pagina of centralService.paginador.paginas; let i = index;"
+      (click)="centralService.changePage(i)">
+      {{pagina + 1}}
+    </div>
+  </div>
+</div>

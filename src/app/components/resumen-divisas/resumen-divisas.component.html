@@ -1,0 +1,48 @@
+<div class="button_filters">
+  <div
+    *ngFor="let currency of divisasService.divisasCurrencies; let i = index;"
+    class="button_filter"
+    (click)="divisasService.selectDivisasCurrency(currency, i)"
+    [ngClass]="{'--active_option': divisasService.currentDivisasCurrency.value === currency.value}"
+  >
+   {{currency.text}}
+  </div>
+</div>
+<div class="main_label">{{divisasService.currentDivisasCurrency.text}}</div>
+<div class="big_buttons_container">
+  <div class="big_button">
+    <div class="big_button_label">Saldo</div>
+    <div class="big_button_value">{{divisasService.resumen.saldo | currency }}</div>
+  </div>
+  <div class="big_button">
+    <div class="big_button_label">Total abonos</div>
+    <div class="big_button_value --green">{{divisasService.resumen.importeAbono | currency}}</div>
+  </div>
+  <div class="big_button">
+    <div class="big_button_label">Total cargos</div>
+    <div class="big_button_value --red">{{divisasService.resumen.importeCargo | currency}}</div>
+  </div>
+</div>
+<div class="operaciones_charts">
+  <div class="chart_outter">
+    <div class="chart_wrapper">
+      <div class="chart_label">
+        <div class="chart_text">Total</div>
+        <div class="chart_bold_text">{{divisasService.resumen.saldo | currency}}</div>
+      </div>
+      <div echarts [options]="divisasService.currentDivisasChart" class="chart_large"></div>
+    </div>
+  </div>
+  <div class="chart_outter">
+    <div class="top_chart_label">Compras</div>
+    <div class="chart_wrapper">
+      <div echarts [options]="divisasService.compraDivisasChart" class="chart_small"></div>
+    </div>
+  </div>
+  <div class="chart_outter">
+    <div class="top_chart_label">Ventas</div>
+    <div class="chart_wrapper">
+      <div echarts [options]="divisasService.ventaDivisasChart" class="chart_small"></div>
+    </div>
+  </div>
+</div>

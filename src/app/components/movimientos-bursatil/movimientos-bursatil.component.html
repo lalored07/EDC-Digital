@@ -1,0 +1,47 @@
+<div class="footer">
+  <div class="main_subtitle">Movimientos de {{bursatilService.currentMarketFilter.altText}}</div>
+  <table class="table" *ngIf="bursatilService.currentMarketFilter.value === 'REPO'">
+    <thead>
+      <tr>
+        <th>No. de títulos</th>
+        <th>Monto invertido</th>
+        <th>Fecha inicio</th>
+        <th>Tasa</th>
+        <th>Plazo</th>
+        <th>Fecha vencimiento</th>
+        <th>Valuación</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let mov of bursatilService.movimientos">
+        <td>{{mov.titulos}}</td>
+        <td>{{mov.montoInversionMesAnt | currency}}</td>
+        <td>{{mov.fechaInicioMesAnt}}</td>
+        <td>{{mov.tasaMesAnt}}</td>
+        <td>{{mov.plazo}}</td>
+        <td>{{mov.fechaVncMesAnt}}</td>
+        <td>{{mov.valuacionMercadoMesAnt | currency}}</td>
+      </tr>
+    </tbody>
+  </table>
+  <table class="table" *ngIf="bursatilService.currentMarketFilter.value === 'CUST'">
+    <thead>
+      <tr>
+        <th>Emisora serie</th>
+        <th>Fecha liquidación</th>
+        <th>Títulos</th>
+        <th>Precio mercado</th>
+        <th>Valuación mercado</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let mov of bursatilService.movimientos">
+        <td>{{mov.emisoraSerie}}</td>
+        <td>{{mov.fechaVnc}}</td>
+        <td>{{mov.titulos}}</td>
+        <td>{{mov.precioIni | currency}}</td>
+        <td>{{mov.importeMercado | currency}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

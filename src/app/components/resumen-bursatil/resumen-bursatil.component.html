@@ -1,0 +1,33 @@
+<div class="button_filters">
+  <div
+    *ngFor="let currency of bursatilService.marketFilters"
+    class="button_filter"
+    (click)="bursatilService.selectMarketFilter(currency)"
+    [ngClass]="{'--active_option': bursatilService.currentMarketFilter.value === currency.value}"
+  >
+   {{currency.text}}
+  </div>
+</div>
+<div class="main_label" style="margin-bottom: 40px">{{bursatilService.currentMarketFilter?.text}}</div>
+<div class="operaciones_charts">
+  <div class="chart_outter">
+    <div class="top_chart_label">Inversión mes actual</div>
+    <div class="chart_wrapper">
+      <div class="chart_label">
+        <div class="chart_text">Agosto</div>
+        <div class="chart_bold_text">{{resumen.importeMercado | currency}}</div>
+      </div>
+      <div echarts [options]="currentMonthChart" class="chart_large"></div>
+    </div>
+  </div>
+  <div class="chart_outter">
+    <div class="top_chart_label">Inversión mes pasado</div>
+    <div class="chart_wrapper">
+      <div class="chart_label">
+        <div class="chart_text">Julio</div>
+        <div class="chart_bold_text">{{resumen.importeMercadoMesAnt | currency}}</div>
+      </div>
+      <div echarts [options]="pastMonthChart" class="chart_medium"></div>
+    </div>
+  </div>
+</div>

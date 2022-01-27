@@ -1,0 +1,69 @@
+<!-- Head -->
+<div class="head">
+  <div class="main_title">Estado de cuenta digital - Banco</div>
+  <div class="main_content">
+    <div class="combo_select">
+      <div class="combo_select_label">Periodo</div>
+      <select name="periodo" id="periodCombo" [formControl]="periodoFormControl">
+        <option value="" disabled>Elige un periodo</option>
+        <option [value]="periodo.value" *ngFor="let periodo of paramsService.periodos">{{periodo.text}}</option>
+      </select>
+    </div>
+    <div class="combo_buttons">
+      <div class="question_icon"></div>
+      <div class="combo_button_item --disabled">Descargar XML</div>
+      <div class="combo_button_item --disabled">Descargar PDF</div>
+      <div class="combo_button_item" (click)="generateCSV([])" [ngClass]="{'--disabled': !canShow}">Descargar Excel</div>
+    </div>
+  </div>
+</div>
+<!-- Head -->
+
+<!-- Body -->
+<div class="body" *ngIf="canShow">
+  <div class="body_content">
+    <app-resumen-central *ngIf="!currentProduct"></app-resumen-central>
+    <ng-container *ngIf="currentProduct">
+      <div class="body_header">
+        <div class="main_subtitle">{{currentProduct.text}}</div>
+        <div class="main_back_button" (click)="clearProduct()">
+          <div class="back_icon"></div>
+          <div class="main_back_button_text">
+            Regresar a cuenta
+          </div>
+        </div>
+      </div>
+    </ng-container>
+    <app-resumen-divisas *ngIf="currentProduct?.value === 'divisas'"></app-resumen-divisas>
+    <app-resumen-swaps *ngIf="currentProduct?.value === 'swaps'"></app-resumen-swaps>
+    <app-resumen-creditos *ngIf="currentProduct?.value === 'creditos'"></app-resumen-creditos>
+    <app-resumen-inversiones *ngIf="currentProduct?.value === 'inversiones'"></app-resumen-inversiones>
+    <app-resumen-derivados *ngIf="currentProduct?.value === 'derivados'"></app-resumen-derivados>
+    <app-resumen-bursatil *ngIf="currentProduct?.value === 'operaciones'"></app-resumen-bursatil>
+  </div>
+  <div class="body_sidebar">
+    <div class="main_subtitle">Productos</div>
+    <div class="main_disclaimer">Elige un producto para consultar</div>
+    <div
+      *ngFor="let product of products"
+      class="sidebar_option_wrapper"
+      (click)="selectProduct(product)"
+      [ngClass]="{'--active_option': currentProduct?.value === product?.value}"
+    >
+      <div [ngClass]="product?.icon || ''"></div>
+      <div class="sidebar_option_text">{{product?.text}}</div>
+    </div>
+  </div>
+</div>
+<!-- Body -->
+
+<!-- Footer -->
+<ng-container *ngIf="canShow">
+  <app-movimientos-central *ngIf="!currentProduct"></app-movimientos-central>
+  <app-movimientos-divisas *ngIf="currentProduct?.value === 'divisas'"></app-movimientos-divisas>
+  <app-movimientos-swaps *ngIf="currentProduct?.value === 'swaps'"></app-movimientos-swaps>
+  <app-movimientos-derivados *ngIf="currentProduct?.value === 'derivados'"></app-movimientos-derivados>
+  <app-movimientos-bursatil *ngIf="currentProduct?.value === 'operaciones'"></app-movimientos-bursatil>
+</ng-container>
+
+<!-- Footer -->

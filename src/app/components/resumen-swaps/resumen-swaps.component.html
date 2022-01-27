@@ -1,0 +1,48 @@
+<div class="button_filters">
+  <div
+    *ngFor="let currency of swapsService.swapsCurrencies; let i = index;"
+    class="button_filter"
+    (click)="swapsService.selectSwapCurrency(currency, i)"
+    [ngClass]="{'--active_option': swapsService.currentSwapCurrency.value === currency.value}"
+  >
+   {{currency.text}}
+  </div>
+</div>
+<div class="main_label">{{swapsService.currentSwapCurrency.text}}</div>
+<div class="big_buttons_container">
+  <div class="big_button">
+    <div class="big_button_label">Monto Pactado</div>
+    <div class="big_button_value">{{swapsService.resumen.montoPactado | currency}}</div>
+  </div>
+  <div class="big_button">
+    <div class="big_button_label">Saldo Inicial</div>
+    <div class="big_button_value --green">{{swapsService.resumen.saldoInicial | currency}}</div>
+  </div>
+  <div class="big_button">
+    <div class="big_button_label">Tipo Cambio Swap</div>
+    <div class="big_button_value --red">{{swapsService.resumen.tipoCambioSwap | currency}}</div>
+  </div>
+</div>
+<div class="operaciones_charts">
+  <div class="chart_outter">
+    <div class="chart_wrapper">
+      <div class="chart_label">
+        <div class="chart_text">Total</div>
+        <div class="chart_bold_text">{{swapsService.resumen.montoPactado + swapsService.resumen.saldoInicial | currency}}</div>
+      </div>
+      <div echarts [options]="swapsService.swapsAutoChart" class="chart_large"></div>
+    </div>
+  </div>
+  <div class="chart_outter">
+    <div class="top_chart_label">Compra de divisas</div>
+    <div class="chart_wrapper">
+      <div echarts [options]="swapsService.compraDivisasChart" class="chart_small"></div>
+    </div>
+  </div>
+  <div class="chart_outter">
+    <div class="top_chart_label">Venta de divisas</div>
+    <div class="chart_wrapper">
+      <div echarts [options]="swapsService.compraDivisasChart" class="chart_small"></div>
+    </div>
+  </div>
+</div>

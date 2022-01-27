@@ -1,0 +1,98 @@
+<div class="button_filters">
+  <div
+    *ngFor="let currency of inversionesService.monedas"
+    class="button_filter"
+    (click)="inversionesService.setMoneda(currency)"
+    [ngClass]="{'--active_option': inversionesService.moneda.value === currency.value}"
+  >
+   {{currency.text}}
+  </div>
+</div>
+<div class="main_label">{{inversionesService.moneda.text}}</div>
+<div class="big_buttons_container">
+  <div
+    *ngFor="let filter of inversionesService.investmentFilters; let i = index;"
+    class="big_button"
+    (click)="inversionesService.setTipoInversion(filter, i)">
+    <div class="big_button_label">{{filter.descInversion}}</div>
+    <div class="big_button_value">{{filter.impInversion | currency}}</div>
+  </div>
+</div>
+<div class="body_child">
+  <div class="operaciones_charts">
+    <div class="chart_outter">
+      <div class="chart_wrapper">
+        <div class="chart_label">
+          <div class="chart_text">Total</div>
+          <div class="chart_bold_text">{{inversionesService.total | currency}}</div>
+        </div>
+        <div
+          echarts
+          [options]="inversionesService.chart"
+          class="chart_medium">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="body_child_item">
+    <div class="main_label">{{inversionesService.tipoInversion.text | uppercase}}</div>
+    <table class="table" *ngIf="inversionesService.currentIndexTipoInversion === 0">
+      <thead>
+        <tr>
+          <th>Monto</th>
+          <th>Tasa pactada</th>
+          <th>GAT real</th>
+          <th>Intereses depositados en el periodo</th>
+          <th>Intereses por depositar</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let mov of inversionesService.movimientos">
+          <td>{{mov.impInversion | currency}}</td>
+          <td>%{{mov.pctTasaPactada}}</td>
+          <td>%{{mov.pctTasaGatReal}}</td>
+          <td>{{mov.impPagoIntPeriodo | currency}}</td>
+          <td>{{mov.impPagoIntPendiente | currency}}</td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td></td>
+          <td></td>
+          <td>Total</td>
+          <td>{{inversionesService.resumen.totInterDeposPer | currency}}</td>
+          <td>{{inversionesService.resumen.totIntDepositar | currency}}</td>
+        </tr>
+      </tfoot>
+    </table>
+    <table class="table" *ngIf="inversionesService.currentIndexTipoInversion === 1">
+      <thead>
+        <tr>
+          <th>Monto</th>
+          <th>Tasa pactada</th>
+          <th>GAT real</th>
+          <th>Intereses depositados en el periodo</th>
+          <th>Intereses por depositar</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let mov of inversionesService.movimientos">
+          <td>{{mov.impInversion | currency}}</td>
+          <td>%{{mov.pctTasaPactada}}</td>
+          <td>%{{mov.pctTasaGatReal}}</td>
+          <td>{{mov.impPagoIntPeriodo | currency}}</td>
+          <td>{{mov.impPagoIntPendiente | currency}}</td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td></td>
+          <td></td>
+          <td>Total</td>
+          <td>{{inversionesService.resumen.totInterDeposPer | currency}}</td>
+          <td>{{inversionesService.resumen.totIntDepositar | currency}}</td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+</div>

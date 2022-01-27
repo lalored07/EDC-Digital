@@ -1,0 +1,73 @@
+<div class="footer">
+  <div class="main_subtitle">Movimientos {{swapsService.currentSwapCurrency.text}}</div>
+  <div class="paginador-container">
+    <div
+      class="paginador-container-item"
+      [ngClass]="{active: swapsService.paginador.paginaActual === i}"
+      *ngFor="let pagina of swapsService.paginador.paginas; let i = index;"
+      (click)="swapsService.changePage(i)">
+      {{pagina + 1}}
+    </div>
+  </div>
+  <table class="table">
+    <thead>
+      <tr>
+        <th (click)="swapsService.getSwaps('fechaMovimiento')">
+          <div class="title-icon" [ngClass]="{'active': swapsService.filters.fechaMovimiento}">
+            Fecha <div class="chevron-down-solid"></div>
+          </div>
+        </th>
+        <th (click)="swapsService.getSwaps('descDetalle')">
+          <div class="title-icon" [ngClass]="{'active': swapsService.filters.descDetalle}">
+            Descripción <div class="chevron-down-solid"></div>
+          </div>
+        </th>
+        <th (click)="swapsService.getSwaps('tipoCambio')">
+          <div class="title-icon" [ngClass]="{'active': swapsService.filters.tipoCambio}">
+            Tipo de cambio <div class="chevron-down-solid"></div>
+          </div>
+        </th>
+        <th (click)="swapsService.getSwaps('monto')">
+          <div class="title-icon" [ngClass]="{'active': swapsService.filters.monto}">
+            Monto <div class="chevron-down-solid"></div>
+          </div>
+        </th>
+        <th (click)="swapsService.getSwaps('abono')">
+          <div class="title-icon" [ngClass]="{'active': swapsService.filters.abono}">
+            Abonos <div class="chevron-down-solid"></div>
+          </div>
+        </th>
+        <th (click)="swapsService.getSwaps('cargo')">
+          <div class="title-icon" [ngClass]="{'active': swapsService.filters.cargo}">
+            Cargos <div class="chevron-down-solid"></div>
+          </div>
+        </th>
+        <th (click)="swapsService.getSwaps('saldoSinIntMxp')">
+          <div class="title-icon" [ngClass]="{'active': swapsService.filters.saldoSinIntMxp}">
+            Saldo <div class="chevron-down-solid"></div>
+          </div>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let mov of swapsService.filteredItems">
+        <td>{{mov.fechaMovimiento}}</td>
+        <td>{{mov.descDetalle}}</td>
+        <td>{{mov.tipoCambio | currency}}</td>
+        <td>{{mov.montoDivisa | currency}}</td>
+        <td>{{mov.abono | currency}}</td>
+        <td>{{mov.cargo | currency}}</td>
+        <td>{{mov.saldoSinIntMxp | currency}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div class="paginador-container">
+  <div
+    class="paginador-container-item"
+    [ngClass]="{active: swapsService.paginador.paginaActual === i}"
+    *ngFor="let pagina of swapsService.paginador.paginas; let i = index;"
+    (click)="swapsService.changePage(i)">
+    {{pagina + 1}}
+  </div>
+</div>
