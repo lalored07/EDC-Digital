@@ -1,5 +1,5 @@
 pipeline { 
-    //agent any
+    agent any
     
     tools { nodejs "nodejs12x" }
     stages {
@@ -10,11 +10,12 @@ pipeline {
                sh 'npm run buildDev'
                println "Se termino de instalar"    
                sh 'cd dist'
-               sh 'ls'
-               
+               sh 'ls'               
+            }
+             steps {
+               sh 'ng serve'      
             }
         }
         
     }
-    agent { dockerfile true }
 }
