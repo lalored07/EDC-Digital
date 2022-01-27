@@ -14,12 +14,16 @@ agent { dockerfile true }
        stage('Build') { 
             steps {
                 sh 'npm -version' 
-                sh 'npm install'      
+                sh 'npm install' 
+                sh 'npm run buildDev' 
+
+                println "Se termino de instalar"    
+                sh 'ls'
             }
         }
-        stage('Front-end-Docker') {
+        stage('Front-end-Docker') { 
             steps {
-                sh 'npm start'
+                //sh 'npm start' 
             }
         }           
         
