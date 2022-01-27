@@ -1,5 +1,6 @@
 pipeline { 
-    agent any
+    //agent any
+    agent { dockerfile true }
     tools { nodejs "nodejs12x" }
     stages {
        stage('Build'){
@@ -9,8 +10,8 @@ pipeline {
                sh 'npm run buildDev'
                println "Se termino de instalar"    
                sh 'cd dist'
-               sh 'cd out'
                sh 'ls'
+               
             }
         }
         
