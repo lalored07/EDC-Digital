@@ -15,7 +15,7 @@ pipeline {
         }
         stage('Run'){
             steps {
-               sh 'ng serve'      
+               sh 'npm start'      
             }
 
         }
