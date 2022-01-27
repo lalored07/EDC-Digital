@@ -1,6 +1,6 @@
 pipeline {
 
-  agent any
+agent { dockerfile true }
 
    tools {
        nodejs "nodejs12x"
@@ -17,11 +17,11 @@ pipeline {
                 sh 'npm install'      
             }
         }
-        stage('Front-end') {
+        stage('Front-end-Docker') {
             steps {
                 sh 'npm start'
             }
-        }                
+        }           
         
     }
 }
