@@ -1,5 +1,5 @@
 pipeline { 
-    agent none
+    agent any
     tools { nodejs "nodejs12x" }
     stages {
        stage('Build'){
@@ -11,10 +11,7 @@ pipeline {
                sh 'ls'
             }
         }
-        stage('Docker') { 
-            steps{
-                agent { dockerfile true }
-            }
+        
         }
     }
 }
