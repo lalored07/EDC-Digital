@@ -20,12 +20,5 @@ agent { dockerfile true }
                 println "Se termino de instalar"    
                 sh 'ls'
             }
-        }
-        stage('Front-end-Docker') { 
-            steps {
-                //sh 'npm start' 
-            }
-        }           
-        
-    }
+        }}
 }
