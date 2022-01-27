@@ -1,6 +1,6 @@
 FROM nginx
 
-ENV NODE_ENV=production
+ENV NODE_ENV=developer
 
 ## Copy Angular App Build to Ngnix Source
 COPY ./dist/out/ /usr/share/nginx/html
