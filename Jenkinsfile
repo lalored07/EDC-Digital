@@ -12,9 +12,12 @@ pipeline {
                sh 'cd dist'
                sh 'ls'               
             }
-             steps {
+        }
+        stage('Run'){
+            steps {
                sh 'ng serve'      
             }
+
         }
         
     }
