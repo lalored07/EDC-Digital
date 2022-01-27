@@ -8,6 +8,8 @@ pipeline {
                sh 'npm install' 
                sh 'npm run buildDev'
                println "Se termino de instalar"    
+               sh 'cd dist'
+               sh 'cd out'
                sh 'ls'
             }
         }
