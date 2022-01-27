@@ -1,6 +1,6 @@
 pipeline {
 
-agent { dockerfile true }
+agent none
 
    tools {
        nodejs "nodejs12x"
@@ -20,5 +20,11 @@ agent { dockerfile true }
                 println "Se termino de instalar"    
                 sh 'ls'
             }
-        }}
+          stage('Docker') { 
+            steps{
+                agent { dockerfile true }
+            }
+          }
+        }
+    }
 }
