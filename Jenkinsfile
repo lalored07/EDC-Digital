@@ -1,8 +1,8 @@
 pipeline { 
     agent any
     
-    //tools { nodejs "nodejs12x" }
-    tools { nodejs "nodejs10x" }
+    tools { nodejs "nodejs12x" }
+    //tools { nodejs "nodejs10x" }
     
     stages {
        stage('Build'){
